@@ -1,0 +1,43 @@
+﻿
+<html>
+<head>
+    <link href="~/lib/css/sweetalert.css" rel="stylesheet" />
+</head>
+<body>
+<input type="text" id="kadi" placeholder="Kadi" />
+<input type="text" id="sif" placeholder="sifre" />
+<input type="button" id="gonder" value="gonder" />
+</body>
+</html>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/js/sweetalert.min.js"></script>
+<script>
+    $("#gonder").click(function() {
+        var deneme = {};
+        deneme.kadi = $("#kadi").val();
+        deneme.pass = $("#sif").val();
+        $.ajax({
+            type:"POST",
+            url:'/Home/Gonder/',
+            data: JSON.stringify(deneme),
+            dataType:"json",
+            contentType: "application/json;charset=utf-8",
+            success:function(gelenDeg) {
+                if (gelenDeg == "1") {
+                    swal({
+                        title: "Başarılı!",
+                        text: "Kayit Başarılı Olay Budur .net Core Çalışıyor!",
+                        type: "success"
+                    });
+                } else {
+                    swal({
+                        title: "Hata!",
+                        text: "net Core Çalışmıyor!",
+                        type: "error"
+                    });
+                }
+            }
+        });
+    });
+</script>
